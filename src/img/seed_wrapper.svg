@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 400 400">
+  <defs>
+    <clipPath id="image-clip">
+      <rect x="0" y="0" width="400" height="400" rx="20"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#image-clip)">
+    <image id="user-image" x="0" y="0" width="400" height="400" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <metadata id="seed" data-seed=""></metadata>
+</svg>
