@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, SquareAsterisk } from 'lucide-react';
 import { SeedDropzone } from './components/SeedDropzone';
 import { LockBox } from './components/LockBox';
 import * as crypto from './lib/crypto';
 import * as storage from './lib/storage';
+
+
+console.log(crypto);
 
 function App() {
   const [seed, setSeed] = useState<string | null>(null);
@@ -26,6 +29,7 @@ function App() {
       const derivedBoxId = crypto.deriveBoxId(salt);
       const finalBoxId = boxId || String(derivedBoxId);
       const finalKeyCode = keyCode || await crypto.generateKeyCode();
+      console.log({finalBoxId,finalKeyCode});
       
       const key = await crypto.deriveKey(seed, salt, Number(finalBoxId), finalKeyCode);
       const { ciphertext, iv } = await crypto.encryptSecret(key, secret);
@@ -70,7 +74,7 @@ function App() {
                 value={boxId}
                 onChange={(e) => setBoxId(e.target.value)}
                 className="w-full px-4 py-2 rounded bg-gray-700 focus:ring-2 focus:ring-blue-500"
-                placeholder="54321"
+                placeholder="Box ID"
               />
             </div>
             
@@ -92,7 +96,7 @@ function App() {
                 value={keyCode}
                 onChange={(e) => setKeyCode(e.target.value)}
                 className="w-full px-4 py-2 rounded bg-gray-700 focus:ring-2 focus:ring-blue-500"
-                placeholder="••••••••"
+                placeholder="•••••• (your memorable passcode)"
               />
               <button
                 type="button"
@@ -100,7 +104,7 @@ function App() {
                 className="absolute right-3 top-9"
               >
                 {showKeyCode ? (
-                  <EyeOff className="w-5 h-5 text-gray-400" />
+                  <SquareAsterisk className="w-5 h-5 text-gray-400" />
                 ) : (
                   <Eye className="w-5 h-5 text-gray-400" />
                 )}

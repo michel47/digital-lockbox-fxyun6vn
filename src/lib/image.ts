@@ -1,3 +1,5 @@
+import seedWrapperImagePath from '/src/img/seed_wrapper.svg'
+
 export async function generateSeedFromImage(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -8,6 +10,7 @@ export async function generateSeedFromImage(file: File): Promise<string> {
         const parser = new DOMParser();
         const svg = parser.parseFromString(dataUrl, 'image/svg+xml');
         const seedElement = svg.getElementById('seed');
+        console.log(seedElement);
         
         if (seedElement?.dataset.seed) {
           resolve(seedElement.dataset.seed);
@@ -16,7 +19,7 @@ export async function generateSeedFromImage(file: File): Promise<string> {
         }
       } else {
         try {
-          const response = await fetch('/src/img/seed_wrapper.svg');
+          const response = await fetch(seedWrapperImagePath);
           const templateText = await response.text();
           const parser = new DOMParser();
           const template = parser.parseFromString(templateText, 'image/svg+xml');
@@ -36,6 +39,7 @@ export async function generateSeedFromImage(file: File): Promise<string> {
           if (seedElement) {
             seedElement.dataset.seed = seed;
           }
+          console.log(imageElement);
           
           resolve(seed);
         } catch (error) {

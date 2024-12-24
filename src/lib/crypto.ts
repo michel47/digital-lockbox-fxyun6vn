@@ -1,5 +1,8 @@
 import * as base64 from './base64';
 
+export { base64 }; // Expose base64 for external use
+console.log(base64);
+
 export async function generateSalt(): Promise<Uint8Array> {
   return crypto.getRandomValues(new Uint8Array(32));
 }
